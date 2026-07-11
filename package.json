@@ -1,0 +1,51 @@
+{
+  "name": "chaiblend",
+  "version": "1.0.0",
+  "description": "Chaiblend - Blend multiple AI models into one synthesized answer.",
+  "bin": {
+    "chaiblend": "dist/cli.js"
+  },
+  "main": "dist/cli.js",
+  "scripts": {
+    "clean": "node -e \"fs.rmSync('dist', { recursive: true, force: true })\"",
+    "prebuild": "pnpm run clean",
+    "build": "tsc",
+    "postbuild": "node -e \"fs.chmodSync('dist/cli.js', '755')\"",
+    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js",
+    "link-local": "pnpm link --global",
+    "unlink-local": "pnpm unlink --global",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "cli",
+    "ai",
+    "self-consistency",
+    "llm"
+  ],
+  "author": "Kevin Rozario",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.9.0",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.110.0",
+    "@clack/prompts": "^1.7.0",
+    "@google/genai": "^2.10.0",
+    "commander": "^15.0.0",
+    "dotenv": "^17.4.2",
+    "openai": "^6.45.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "prettier": "^3.9.4",
+    "tsx": "^4.23.0",
+    "typescript": "^7.0.2"
+  }
+}

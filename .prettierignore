@@ -1,0 +1,22 @@
+# Dependencies & Package Management
+node_modules
+pnpm-lock.yaml
+
+# Compiled Artifacts & Cache
+dist
+.turbo
+.cache
+
+# Configuration & State Directories
+.vscode
+.idea
+
+# Secrets & Environment Variations
+.env
+.env.*
+!.env.example
+
+# Local System & Logging Files
+.DS_Store
+Thumbs.db
+*.log
