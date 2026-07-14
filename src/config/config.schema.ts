@@ -6,7 +6,7 @@ export const ProviderConfigSchema = z.object({
   enabled: z.boolean().default(true),
 });
 
-export const ChaiblendConfigSchema = z.object({
+export const ConvergeConfigSchema = z.object({
   providers: z.object({
     openai: ProviderConfigSchema,
     claude: ProviderConfigSchema,
@@ -29,12 +29,12 @@ export const ChaiblendConfigSchema = z.object({
   }),
 });
 
-export type ChaiblendConfig = z.infer<typeof ChaiblendConfigSchema>;
+export type ConvergeConfig = z.infer<typeof ConvergeConfigSchema>;
 export type ProviderConfig = z.infer<typeof ProviderConfigSchema>;
-export type RunDefaults = ChaiblendConfig["defaults"];
-export type GuardrailConfig = ChaiblendConfig["guardrails"];
+export type RunDefaults = ConvergeConfig["defaults"];
+export type GuardrailConfig = ConvergeConfig["guardrails"];
 
 /** Output-only shape for `config list`- keys redacted, never round-trips to disk. */
-export type MaskedConfig = Omit<ChaiblendConfig, "providers"> & {
+export type MaskedConfig = Omit<ConvergeConfig, "providers"> & {
   providers: Record<string, Omit<ProviderConfig, "apiKey"> & { apiKey: string | null }>;
 };

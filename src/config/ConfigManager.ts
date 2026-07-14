@@ -4,7 +4,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 
 import type {
-  ChaiblendConfig,
+  ConvergeConfig,
   GuardrailConfig,
   MaskedConfig,
   ProviderConfig,
@@ -12,7 +12,7 @@ import type {
 } from "./config.schema.js";
 import type { ProviderName } from "../engine/types.js";
 
-import { ChaiblendConfigSchema } from "./config.schema.js";
+import { ConvergeConfigSchema } from "./config.schema.js";
 
 export class ConfigError extends Error {
   constructor(message: string, options?: { cause?: unknown }) {
@@ -24,16 +24,16 @@ export class ConfigError extends Error {
 export class ConfigManager {
   private readonly configDir: string;
   private readonly configPath: string;
-  private cache: ChaiblendConfig | null;
+  private cache: ConvergeConfig | null;
 
   constructor(configDir?: string) {
-    this.configDir = configDir ?? path.join(os.homedir(), ".config", "chaiblend");
+    this.configDir = configDir ?? path.join(os.homedir(), ".config", "converge");
     this.configPath = path.join(this.configDir, "config.json");
     this.cache = null;
   }
 
   // Core load/save
-  private load(): ChaiblendConfig {
+  private load(): ConvergeConfig {
     if (this.cache) return this.cache;
 
     if (!fs.existsSync(this.configPath)) {
@@ -62,7 +62,7 @@ export class ConfigManager {
     return this.validate(parsed);
   }
 
-  private save(config: ChaiblendConfig): void {
+  private save(config: ConvergeConfig): void {
     try {
       if (!fs.existsSync(this.configDir)) {
         fs.mkdirSync(this.configDir, { recursive: true });
@@ -74,7 +74,7 @@ export class ConfigManager {
     }
   }
 
-  private createDefaultConfig(): ChaiblendConfig {
+  private createDefaultConfig(): ConvergeConfig {
     return {
       providers: {
         openai: { model: "gpt-4o", enabled: true },
@@ -96,15 +96,15 @@ export class ConfigManager {
     };
   }
 
-  private validate(raw: unknown): ChaiblendConfig {
-    const result = ChaiblendConfigSchema.safeParse(raw);
+  private validate(raw: unknown): ConvergeConfig {
+    const result = ConvergeConfigSchema.safeParse(raw);
 
     if (!result.success) {
       const issues = result.error.issues
         .map((i) => `  - ${i.path.join(".")}: ${i.message}`)
         .join("\n");
       throw new ConfigError(
-        `Config file at ${this.configPath} is invalid:\n${issues}\nFix it manually, or run \`chai config edit\`.`,
+        `Config file at ${this.configPath} is invalid:\n${issues}\nFix it manually, or run \`converge config edit\`.`,
       );
     }
 
@@ -171,7 +171,7 @@ export class ConfigManager {
 
     if (!enabled && config.evaluator.provider === provider) {
       throw new ConfigError(
-        `Cannot disable ${provider} — it's the current evaluator. Run \`chai config set-evaluator <provider>\` first.`,
+        `Cannot disable ${provider} — it's the current evaluator. Run \`converge config set-evaluator <provider>\` first.`,
       );
     }
 
@@ -190,7 +190,7 @@ export class ConfigManager {
 
     if (!config.providers[provider].enabled) {
       throw new ConfigError(
-        `Cannot set ${provider} as evaluator — it's currently disabled. Run \`chai config set-enabled ${provider} true\` first.`,
+        `Cannot set ${provider} as evaluator — it's currently disabled. Run \`converge config set-enabled ${provider} true\` first.`,
       );
     }
 

@@ -1,9 +1,9 @@
 {
-  "name": "chaiblend",
+  "name": "converge-ai",
   "version": "1.0.0",
-  "description": "Chaiblend - Blend multiple AI models into one synthesized answer.",
+  "description": "Multi-model AI ensembling and self-consistency engine.",
   "bin": {
-    "chaiblend": "dist/cli.js"
+    "converge": "dist/cli.js"
   },
   "main": "dist/cli.js",
   "scripts": {
@@ -13,8 +13,8 @@
     "postbuild": "node -e \"fs.chmodSync('dist/cli.js', '755')\"",
     "dev": "tsx src/cli.ts",
     "start": "node dist/cli.js",
-    "link-local": "pnpm link --global",
-    "unlink-local": "pnpm unlink --global",
+    "link-local": "pnpm add -g .",
+    "unlink-local": "pnpm rm -g converge",
     "format": "prettier --write ."
   },
   "keywords": [
@@ -37,6 +37,7 @@
     "@anthropic-ai/sdk": "^0.110.0",
     "@clack/prompts": "^1.7.0",
     "@google/genai": "^2.10.0",
+    "chaiblend": "link:",
     "commander": "^15.0.0",
     "dotenv": "^17.4.2",
     "openai": "^6.45.0",

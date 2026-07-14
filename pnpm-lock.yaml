@@ -203,6 +203,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  chaiblend: 'link:'
+
 importers:
 
   .:
@@ -216,6 +219,9 @@ importers:
       '@google/genai':
         specifier: ^2.10.0
         version: 2.11.0
+      chaiblend:
+        specifier: 'link:'
+        version: 'link:'
       commander:
         specifier: ^15.0.0
         version: 15.0.0
