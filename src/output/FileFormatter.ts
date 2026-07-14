@@ -24,7 +24,7 @@ export class FileFormatter implements OutputFormatter {
 
   private toMarkdown(result: EngineResult): string {
     const lines: string[] = [
-      "# Chaiblend run",
+      "# Converge run",
       "",
       `**Question:** ${result.prompt}`,
       "",

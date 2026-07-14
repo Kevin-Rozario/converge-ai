@@ -32,7 +32,7 @@ export class SelfConsistencyEngine {
 
     if (this.providers.length === 0) {
       throw new EngineCancelledError(
-        "No providers configured. Run `chai config set-key <provider> <key>` first.",
+        "No providers configured. Run `converge config set-key <provider> <key>` first.",
       );
     }
 

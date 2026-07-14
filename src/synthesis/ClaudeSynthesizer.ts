@@ -5,7 +5,7 @@ import { Synthesizer, SynthesisError, type SynthesisResult } from "./Synthesizer
 import { FinalAnswerSchema } from "../schemas/finalAnswer.schema.js";
 import { delimit } from "../guardrails/delimit.js";
 
-const JUDGE_SYSTEM_PROMPT = `You are the final-answer synthesizer in a multi-model answer engine called Chaiblend.
+const JUDGE_SYSTEM_PROMPT = `You are the final-answer synthesizer in a multi-model answer engine called Converge.
 You will receive a user's question wrapped in a <user_question> tag, followed by one answer from each
 of several AI models that were asked that same question independently, each wrapped in a
 <model_answer provider="..."> tag.
