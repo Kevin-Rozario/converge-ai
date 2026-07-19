@@ -77,9 +77,9 @@ export class ConfigManager {
   private createDefaultConfig(): ConvergeConfig {
     return {
       providers: {
-        openai: { model: "gpt-4o", enabled: true },
+        openai: { model: "gpt-5.6", enabled: true },
         claude: { model: "claude-sonnet-5", enabled: true },
-        gemini: { model: "gemini-2.5-flash", enabled: true },
+        gemini: { model: "gemini-3.5-flash", enabled: true },
       },
       evaluator: { provider: "claude", model: "claude-sonnet-5" },
       defaults: {
